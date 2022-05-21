@@ -1,7 +1,7 @@
-import 'package:auth_firebase/auth/helpers/auth_manager.dart';
-import 'package:auth_firebase/auth/models/old_login_request_model.dart';
-import 'package:auth_firebase/auth/models/old_register_request_model.dart';
-import 'package:auth_firebase/auth/controllers/old_login_service.dart';
+import 'package:alexandrya/auth/helpers/auth_manager.dart';
+import 'package:alexandrya/auth/models/old_login_request_model.dart';
+import 'package:alexandrya/auth/models/old_register_request_model.dart';
+import 'package:alexandrya/auth/controllers/old_login_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

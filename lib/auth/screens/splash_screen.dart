@@ -1,5 +1,5 @@
-import 'package:auth_firebase/auth/helpers/auth_manager.dart';
-import 'package:auth_firebase/auth/helpers/auth_onboard.dart';
+import 'package:alexandrya/auth/helpers/auth_manager.dart';
+import 'package:alexandrya/auth/helpers/auth_onboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

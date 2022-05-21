@@ -1,5 +1,5 @@
-import 'package:auth_firebase/auth/controllers/auth_controller.dart';
-import 'package:auth_firebase/helpers/loading/loading_overlay.dart';
+import 'package:alexandrya/auth/controllers/auth_controller.dart';
+import 'package:alexandrya/helpers/loading/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

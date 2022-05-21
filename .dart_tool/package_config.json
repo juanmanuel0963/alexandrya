@@ -392,13 +392,13 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "auth_firebase",
+      "name": "alexandrya",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-05-21T19:42:05.366357Z",
+  "generated": "2022-05-21T22:19:33.169503Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }

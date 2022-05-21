@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:auth_firebase/auth/constants/firebase_constants.dart';
-import 'package:auth_firebase/auth/helpers/auth_manager.dart';
+import 'package:alexandrya/auth/constants/firebase_constants.dart';
+import 'package:alexandrya/auth/helpers/auth_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:async';

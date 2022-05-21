@@ -1,4 +1,4 @@
-import 'package:auth_firebase/auth/helpers/cache_manager.dart';
+import 'package:alexandrya/auth/helpers/cache_manager.dart';
 import 'package:get/get.dart';
 
 class AuthManager extends GetxController with CacheManager {

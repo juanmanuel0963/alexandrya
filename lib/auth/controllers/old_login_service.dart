@@ -1,7 +1,7 @@
-import 'package:auth_firebase/auth/models/old_login_request_model.dart';
-import 'package:auth_firebase/auth/models/old_login_response_model.dart';
-import 'package:auth_firebase/auth/models/old_register_request_model.dart';
-import 'package:auth_firebase/auth/models/old_register_response_model.dart';
+import 'package:alexandrya/auth/models/old_login_request_model.dart';
+import 'package:alexandrya/auth/models/old_login_response_model.dart';
+import 'package:alexandrya/auth/models/old_register_request_model.dart';
+import 'package:alexandrya/auth/models/old_register_response_model.dart';
 import 'package:get/get_connect.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
