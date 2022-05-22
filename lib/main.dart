@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: LoadingOverlay(
+      home: const LoadingOverlay(
         child: SplashScreen(),
       ),
       builder: (context, child) => ResponsiveWrapper.builder(
@@ -59,9 +59,9 @@ class MyApp extends StatelessWidget {
             case Routes.home:
               return const HomeScreen();
             case Routes.splash:
-              return SplashScreen();
+              return const SplashScreen();
             case Routes.settings:
-              return SplashScreen();
+              return const SplashScreen();
             default:
               return const SizedBox.shrink();
           }

@@ -6,10 +6,10 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
   //AuthenticationManager _authManager = Get.find();
   @override
   Widget build(BuildContext context) {
@@ -19,8 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                //_authManager.logOut();
-                // this icon button is for the user to signout
                 AuthController.authInstance.signOut();
               },
               icon: const Icon(Icons.logout_rounded))
