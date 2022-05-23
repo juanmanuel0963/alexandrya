@@ -1,13 +1,11 @@
-import 'package:alexandrya/auth/controllers/auth_controller.dart';
 import 'package:agora_uikit/agora_uikit.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class VideoChatScreen extends StatefulWidget {
   const VideoChatScreen({Key? key}) : super(key: key);
 
   @override
-  State<VideoChatScreen> createState() => VideoChatScreenState();
+  VideoChatScreenState createState() => VideoChatScreenState();
 }
 
 class VideoChatScreenState extends State<VideoChatScreen> {
@@ -16,11 +14,17 @@ class VideoChatScreenState extends State<VideoChatScreen> {
         appId: "b2a08fe59f714c148d732406e3e4f83e",
         channelName: "LiveChannel1",
         tempToken:
-            "006b2a08fe59f714c148d732406e3e4f83eIADmv5g+keChrqsjI5pMpBRfOoBvkW8dUYQMB3DyIi0v66LaFH8AAAAAEACucvvFK8KKYgEAAQAqwopi"),
+            "006b2a08fe59f714c148d732406e3e4f83eIACNwtqjbeFSCbDkt2voKbuKeghPly6tk9UGxopOo4fIz6LaFH8AAAAAEAASigVRxwyNYgEAAQDHDI1i"),
     enabledPermission: [
       Permission.camera,
       Permission.microphone,
     ],
+    agoraEventHandlers: AgoraEventHandlers(
+      userJoined: (uid, elapsed) => print("USER JOINED: $uid"),
+      userOffline: (uid, reason) => print("USER OFFLINE REASON $reason"),
+      leaveChannel: (rtcstats) => print("USER LEAVE CHANNEL REASON $rtcstats"),
+      onError: (errorcode) => print("ON ERROR EVENT REASON $errorcode"),
+    ),
   );
 
   @override
@@ -36,16 +40,10 @@ class VideoChatScreenState extends State<VideoChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      /*
       appBar: AppBar(
-        title: Text('home'.tr),
-        actions: [
-          IconButton(
-              onPressed: () {
-                AuthController.authInstance.signOut();
-              },
-              icon: const Icon(Icons.logout_rounded))
-        ],
-      ),
+        title: const Text('Second Route'),
+      ),*/
       body: SafeArea(
         child: Stack(
           children: [
@@ -59,6 +57,16 @@ class VideoChatScreenState extends State<VideoChatScreen> {
           ],
         ),
       ),
+      /*
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Go back!'),
+        ),
+      ),
+      */
     );
   }
 }

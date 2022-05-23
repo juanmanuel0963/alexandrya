@@ -134,7 +134,7 @@ class AuthScreenState extends State<AuthScreen> {
   // This function will be triggered when the button is pressed
   void authLoginLoading() async {
     LoadingOverlay.of(context).show();
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 0));
 
     if (formKey.currentState?.validate() ?? false) {
       String sStatusMessage = await AuthController.authInstance.login(
@@ -158,7 +158,7 @@ class AuthScreenState extends State<AuthScreen> {
 
   void authRegisterLoading() async {
     LoadingOverlay.of(context).show();
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 0));
 
     if (formKey.currentState?.validate() ?? false) {
       String sStatusMessage = await AuthController.authInstance.register(

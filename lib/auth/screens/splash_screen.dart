@@ -36,7 +36,7 @@ class SplashScreenState extends State<SplashScreen> {
     _authmanager.checkLoginStatus();
 
     //Simulate other services for 3 seconds
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 0));
   }
 
   Scaffold waitingView() {

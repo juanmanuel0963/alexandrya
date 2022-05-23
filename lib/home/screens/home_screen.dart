@@ -1,4 +1,6 @@
+import 'package:alexandrya/auth/helpers/auth_manager.dart';
 import 'package:alexandrya/auth/controllers/auth_controller.dart';
+import 'package:alexandrya/video_chat/screens/video_chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,7 +12,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  //AuthenticationManager _authManager = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,8 +25,13 @@ class HomeScreenState extends State<HomeScreen> {
               icon: const Icon(Icons.logout_rounded))
         ],
       ),
-      body: const Center(
-        child: Text('home'),
+      body: Center(
+        child: ElevatedButton(
+          child: const Text('Video Chat'),
+          onPressed: () {
+            Get.to(const VideoChatScreen());
+          },
+        ),
       ),
     );
   }

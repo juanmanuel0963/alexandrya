@@ -1,10 +1,12 @@
 import 'package:alexandrya/auth/constants/firebase_constants.dart';
 import 'package:alexandrya/auth/controllers/auth_controller.dart';
+import 'package:alexandrya/auth/helpers/auth_manager.dart';
 import 'package:alexandrya/auth/screens/splash_screen.dart';
 import 'package:alexandrya/helpers/loading/loading_overlay.dart';
 import 'package:alexandrya/helpers/translations/app_translations.dart';
 import 'package:alexandrya/helpers/routes/routes.dart';
 import 'package:alexandrya/home/screens/home_screen.dart';
+import 'package:alexandrya/video_chat/screens/video_chat_screen.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
@@ -56,12 +58,12 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: (RouteSettings settings) {
         return Routes.fadeThrough(settings, (context) {
           switch (settings.name) {
-            case Routes.home:
-              return const HomeScreen();
             case Routes.splash:
               return const SplashScreen();
-            case Routes.settings:
-              return const SplashScreen();
+            case Routes.home:
+              return const HomeScreen();
+            case Routes.videoChat:
+              return const VideoChatScreen();
             default:
               return const SizedBox.shrink();
           }
