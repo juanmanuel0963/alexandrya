@@ -9,6 +9,8 @@ class VideoChatScreen extends StatefulWidget {
 }
 
 class VideoChatScreenState extends State<VideoChatScreen> {
+  bool isVisible = false;
+
   final AgoraClient client = AgoraClient(
     agoraConnectionData: AgoraConnectionData(
         appId: "b2a08fe59f714c148d732406e3e4f83e",
@@ -55,6 +57,44 @@ class VideoChatScreenState extends State<VideoChatScreen> {
             AgoraVideoButtons(
               client: client,
               enabledButtons: const [
+                BuiltInButtons.toggleMic,
+                BuiltInButtons.toggleCamera,
+                BuiltInButtons.switchCamera,
+                BuiltInButtons.callEnd,
+              ],
+              /*
+              extraButtons: [
+                RawMaterialButton(
+                  onPressed: () {
+                    setState(() {
+                      isVisible = !isVisible;
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(12.0),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: isVisible ? Colors.white : Colors.blue),
+                    child: isVisible
+                        ? const Icon(
+                            Icons.visibility,
+                            color: Colors.blue,
+                            size: 20,
+                          )
+                        : const Icon(
+                            Icons.visibility_off,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                  ),
+                )
+              ],
+              */
+            ),
+            /*
+            AgoraVideoButtons(
+              client: client,
+              enabledButtons: const [
                 BuiltInButtons.toggleCamera,
                 BuiltInButtons.toggleMic,
                 BuiltInButtons.switchCamera,
@@ -65,7 +105,7 @@ class VideoChatScreenState extends State<VideoChatScreen> {
                     child: const Icon(Icons.call_end),
                     onPressed: () => _endMeating(context)),
               ],
-            ),
+            ),*/
           ],
         ),
       ),
