@@ -13,8 +13,9 @@ class VideoChatScreenState extends State<VideoChatScreen> {
     agoraConnectionData: AgoraConnectionData(
         appId: "b2a08fe59f714c148d732406e3e4f83e",
         channelName: "LiveChannel1",
+        //username: "user",
         tempToken:
-            "006b2a08fe59f714c148d732406e3e4f83eIAA8AKpqBmVZikFYJjwAcFvPyLThaqu/QppwACxdJR2uU6LaFH8AAAAAEAAxnPH9gCOQYgEAAQB/I5Bi"),
+            "006b2a08fe59f714c148d732406e3e4f83eIABN1i6sUrDthU1+l/B/e11bIVnGLXWNKw7l8JepVWKCdKLaFH8AAAAAEAC0lltgDGORYgEAAQAKY5Fi"),
     enabledPermission: [
       Permission.camera,
       Permission.microphone,
@@ -34,39 +35,45 @@ class VideoChatScreenState extends State<VideoChatScreen> {
   }
 
   void initAgora() async {
-    await client.initialize();
+    try {
+      await client.initialize();
+    } catch (exception)
+    // ignore: empty_catches
+    {}
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*
-      appBar: AppBar(
-        title: const Text('Second Route'),
-      ),*/
       body: SafeArea(
         child: Stack(
           children: [
             AgoraVideoViewer(
               client: client,
-              layoutType: Layout.floating,
+              layoutType: Layout.grid,
             ),
             AgoraVideoButtons(
               client: client,
+              enabledButtons: const [
+                BuiltInButtons.toggleCamera,
+                BuiltInButtons.toggleMic,
+                BuiltInButtons.switchCamera,
+              ],
+              extraButtons: [
+                FloatingActionButton(
+                    backgroundColor: Colors.red,
+                    child: const Icon(Icons.call_end),
+                    onPressed: () => _endMeating(context)),
+              ],
             ),
           ],
         ),
       ),
-      /*
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Go back!'),
-        ),
-      ),
-      */
     );
+  }
+
+  _endMeating(BuildContext context) async {
+    client.sessionController.endCall();
+    Navigator.pop(context);
   }
 }
