@@ -1,6 +1,6 @@
-import 'package:alexandrya/video_chat/screens/video_chat_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:alexandrya/events/screens/events_list_screen.dart';
 import 'package:alexandrya/users/models/user.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UserScreen extends StatefulWidget {
@@ -36,9 +36,9 @@ class UserScreenState extends State<UserScreen> {
               ),
             ),
             ElevatedButton(
-              child: const Text('Video Chat'),
+              child: const Text('Availability'),
               onPressed: () {
-                Get.to(const VideoChatScreen());
+                Get.to(() => EventsListScreen(user: widget.user));
               },
             ),
           ],

@@ -102,7 +102,7 @@ class UsersListScreenState extends State<UsersListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Infinite Scroll ListView'),
+          title: const Text('Meet your starts'),
         ),
         body: RefreshIndicator(
             onRefresh: refresh,
@@ -123,9 +123,9 @@ class UsersListScreenState extends State<UsersListScreen> {
                         subtitle: Text(item.email),
                         //trailing: const Icon(Icons.arrow_forward),
                         onTap: () {
-                          Get.to(UserScreen(
-                            user: item,
-                          ));
+                          Get.to(() => UserScreen(
+                                user: item,
+                              ));
                         },
                       ),
                     );

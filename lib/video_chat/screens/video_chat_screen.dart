@@ -17,7 +17,7 @@ class VideoChatScreenState extends State<VideoChatScreen> {
         channelName: "LiveChannel1",
         //username: "user",
         tempToken:
-            "006b2a08fe59f714c148d732406e3e4f83eIAA9UqgIT1qdIjyJwjxUsPIfcZ+lab+GRmaj0/GQhHsPyaLaFH8AAAAAEABF5qhUqXujYgEAAQCne6Ni"),
+            "006b2a08fe59f714c148d732406e3e4f83eIAD9q3k29DWSQg8246Te3pfx+O7hlR/hl0y9boThMBN3oKLaFH8AAAAAEABUm4+sEgelYgEAAQARB6Vi"),
     enabledPermission: [
       Permission.camera,
       Permission.microphone,

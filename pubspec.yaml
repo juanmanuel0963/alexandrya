@@ -59,7 +59,10 @@ dependency_overrides:
   firebase_analytics: 9.1.7
   get: 4.6.1
   get_storage: 2.0.3
-
+  syncfusion_flutter_calendar: 20.1.55
+  syncfusion_flutter_datepicker: 20.1.55
+  syncfusion_flutter_core: 20.1.55
+  
 flutter_icons:
   android: true
   ios: true

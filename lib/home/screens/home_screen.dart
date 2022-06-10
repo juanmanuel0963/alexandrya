@@ -29,7 +29,7 @@ class HomeScreenState extends State<HomeScreen> {
         child: ElevatedButton(
           child: const Text('Users list'),
           onPressed: () {
-            Get.to(const UsersListScreen());
+            Get.to(() => const UsersListScreen());
           },
         ),
       ),
