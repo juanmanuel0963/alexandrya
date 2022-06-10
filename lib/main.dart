@@ -1,6 +1,5 @@
 import 'package:alexandrya/auth/constants/firebase_constants.dart';
 import 'package:alexandrya/auth/controllers/auth_controller.dart';
-import 'package:alexandrya/auth/helpers/auth_manager.dart';
 import 'package:alexandrya/auth/screens/splash_screen.dart';
 import 'package:alexandrya/helpers/loading/loading_overlay.dart';
 import 'package:alexandrya/helpers/translations/app_translations.dart';

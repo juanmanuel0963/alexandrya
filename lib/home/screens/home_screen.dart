@@ -1,6 +1,6 @@
-import 'package:alexandrya/auth/helpers/auth_manager.dart';
 import 'package:alexandrya/auth/controllers/auth_controller.dart';
-import 'package:alexandrya/video_chat/screens/video_chat_screen.dart';
+//import 'package:alexandrya/video_chat/screens/video_chat_screen.dart';
+import 'package:alexandrya/users/screens/users_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,9 +27,9 @@ class HomeScreenState extends State<HomeScreen> {
       ),
       body: Center(
         child: ElevatedButton(
-          child: const Text('Video Chat'),
+          child: const Text('Users list'),
           onPressed: () {
-            Get.to(const VideoChatScreen());
+            Get.to(const UsersListScreen());
           },
         ),
       ),
