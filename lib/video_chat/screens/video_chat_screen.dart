@@ -61,6 +61,8 @@ class VideoChatScreenState extends State<VideoChatScreen> {
                 BuiltInButtons.toggleCamera,
                 BuiltInButtons.switchCamera,
                 BuiltInButtons.callEnd,
+                //buttons.dart --comentar: widget.client.sessionController.dispose();
+                //layout.dart --comentar: widget.client.sessionController.dispose();
               ],
               /*
               extraButtons: [
@@ -103,7 +105,7 @@ class VideoChatScreenState extends State<VideoChatScreen> {
                 FloatingActionButton(
                     backgroundColor: Colors.red,
                     child: const Icon(Icons.call_end),
-                    onPressed: () => _endMeating(context)),
+                    onPressed: () => _endMeeting(context)),
               ],
             ),*/
           ],
@@ -112,7 +114,7 @@ class VideoChatScreenState extends State<VideoChatScreen> {
     );
   }
 
-  _endMeating(BuildContext context) async {
+  _endMeeting(BuildContext context) async {
     client.sessionController.endCall();
     Navigator.pop(context);
   }
