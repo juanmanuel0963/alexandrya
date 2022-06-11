@@ -1,4 +1,4 @@
-import 'package:alexandrya/events/screens/events_list_screen.dart';
+import 'package:alexandrya/meetings/screens/meetings_list_screen.dart';
 import 'package:alexandrya/users/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,7 +38,7 @@ class UserScreenState extends State<UserScreen> {
             ElevatedButton(
               child: const Text('Availability'),
               onPressed: () {
-                Get.to(() => EventsListScreen(user: widget.user));
+                Get.to(() => MeetingsListScreen(user: widget.user));
               },
             ),
           ],
