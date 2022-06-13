@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 /// information about the event data which will be rendered in calendar.
 class MeetingModel {
   /// Creates a meeting class with required details.
-  MeetingModel(
-      this.meetingName, this.from, this.to, this.background, this.isAllDay);
+  MeetingModel(this.meetingName, this.from, this.to, this.background,
+      this.isAllDay, this.dateFrom, this.dateTo, this.timeFrom, this.timeTo);
 
   /// Event name which is equivalent to subject property of [Appointment].
   String meetingName;
@@ -21,4 +21,12 @@ class MeetingModel {
 
   /// IsAllDay which is equivalent to isAllDay property of [Appointment].
   bool isAllDay;
+
+  String dateFrom;
+
+  String dateTo;
+
+  String timeFrom;
+
+  String timeTo;
 }

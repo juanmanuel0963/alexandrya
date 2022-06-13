@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:alexandrya/users/models/user.dart';
 import 'package:alexandrya/users/screens/user_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'dart:convert';

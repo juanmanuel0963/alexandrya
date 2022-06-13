@@ -3,7 +3,9 @@ import 'package:alexandrya/meetings/screens/meeting_screen.dart';
 import 'package:alexandrya/users/models/user.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
+import 'dart:convert';
 
 class MeetingsListScreen extends StatefulWidget {
   const MeetingsListScreen({Key? key, required this.user}) : super(key: key);
@@ -14,6 +16,19 @@ class MeetingsListScreen extends StatefulWidget {
 }
 
 class MeetingsListScreenState extends State<MeetingsListScreen> {
+  List<User> items = [];
+  bool isLoading = false;
+  bool hasMore = true;
+  int pageSize = 15;
+  int pageNumber = 1;
+
+  @override
+  void initState() {
+    super.initState();
+
+    fetch();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +53,7 @@ class MeetingsListScreenState extends State<MeetingsListScreen> {
               textAlign: TextAlign.center,
             ),
             dataSource: EventDataSource(_getDataSource()),
+            //dataSource: _getCalendarDataSource(),
             monthViewSettings: const MonthViewSettings(
                 appointmentDisplayMode:
                     MonthAppointmentDisplayMode.appointment),
@@ -81,9 +97,77 @@ class MeetingsListScreenState extends State<MeetingsListScreen> {
     final DateTime today = DateTime.now();
     final DateTime startTime = DateTime(today.year, today.month, today.day, 9);
     final DateTime endTime = startTime.add(const Duration(hours: 2));
-    meetings.add(MeetingModel(
-        'One on one session', startTime, endTime, Colors.grey, false));
+    meetings.add(MeetingModel('One on one session', startTime, endTime,
+        Colors.grey, false, '', '', '', ''));
+
     return meetings;
+  }
+
+  Future fetch() async {
+    if (isLoading) return;
+    isLoading = true;
+
+    final url = Uri.parse(
+        'https://us-east1-bamboo-dryad-351723.cloudfunctions.net/getusersbypage?pagesize=$pageSize&pagenumber=$pageNumber');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      Map<String, dynamic> responseObject = jsonDecode(response.body);
+      String sStatus = responseObject["status"];
+      List usersList = responseObject["userslist"];
+
+      setState(() {
+        pageNumber++;
+        isLoading = false;
+
+        if (usersList.length < pageSize) {
+          hasMore = false;
+        }
+
+        items.addAll(usersList.map<User>((item) {
+          User u = User();
+
+          u.iId = item['id'];
+          u.firstname = item['firstname'];
+          u.lastname = item['lastname'];
+          u.email = item['email'];
+          u.uid = item['uid'];
+          //Images soure
+          //https://api.unsplash.com/photos/random?query=woman&client_id=LGttr4Hei-EQUSxEgzev52ajr2S1U1Frr-IRw86gRfE
+
+          if (u.iId.floor().isEven) {
+            u.urlavatar =
+                'https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1522529599102-193c0d76b5b6';
+          } else {
+            u.urlavatar =
+                'https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1548142813-c348350df52b';
+          }
+
+          return u;
+        }).toList());
+      });
+    }
+  }
+
+  Future<DataSource> _getCalendarDataSource() async {
+    List<Appointment> appointments = <Appointment>[];
+    appointments.add(Appointment(
+      startTime: DateTime.now(),
+      endTime: DateTime.now().add(Duration(hours: 2)),
+      isAllDay: true,
+      subject: 'Meeting',
+      color: Colors.blue,
+      startTimeZone: '',
+      endTimeZone: '',
+    ));
+
+    return DataSource(appointments);
+  }
+}
+
+class DataSource extends CalendarDataSource {
+  DataSource(List<Appointment> source) {
+    appointments = source;
   }
 }
 
