@@ -41,7 +41,9 @@ dependencies:
   responsive_framework: ^0.1.9
   #google_fonts: ^2.3.2
   animations: ^2.0.2
+  decimal: ^2.2.0
   #loading_gifs: ^0.3.0
+
 
 dev_dependencies:
   flutter_test:

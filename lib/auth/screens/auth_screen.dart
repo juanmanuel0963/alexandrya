@@ -37,7 +37,7 @@ class AuthScreenState extends State<AuthScreen> {
       key: formKey,
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         TextFormField(
-          controller: emailCtr..text = "george.bluth@reqres.in",
+          controller: emailCtr..text = "juanmanuel0963@gmail.com",
           decoration: inputDecoration('E-mail', Icons.person),
           validator: (value) {
             return (value == null || value.isEmpty) ? 'enter_email'.tr : null;
@@ -81,7 +81,7 @@ class AuthScreenState extends State<AuthScreen> {
       key: formKey,
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         TextFormField(
-          controller: emailCtr..text = "george.bluth@reqres.in",
+          controller: emailCtr..text = "juanmanuel0963@gmail.com",
           decoration: inputDecoration('E-mail', Icons.person),
           validator: (value) {
             return (value == null || value.isEmpty) ? 'enter_email'.tr : null;

@@ -1,6 +1,7 @@
-import 'package:alexandrya/meetings/models/meeting_model.dart';
+import 'package:alexandrya/meetings/models/meeting.dart';
 import 'package:alexandrya/meetings/screens/meeting_screen.dart';
 import 'package:alexandrya/users/models/user.dart';
+import 'package:decimal/decimal.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -39,7 +40,7 @@ class MeetingsListScreenOldState extends State<MeetingsListScreenOld> {
             onTap: (appointmentDetails) {
               if (appointmentDetails.appointments?.length == 1) {
                 Get.to(() => MeetingScreen(
-                      appointmentDetails: appointmentDetails.appointments![0],
+                      meetingDetails: appointmentDetails.appointments![0],
                       user: widget.user,
                     ));
               }
@@ -92,25 +93,34 @@ class MeetingsListScreenOldState extends State<MeetingsListScreenOld> {
                     )))));
   }
 
-  List<MeetingModel> _getDataSource() {
-    final List<MeetingModel> meetings = <MeetingModel>[];
+  List<Meeting> _getDataSource() {
+    //
+    final List<Meeting> meetings = <Meeting>[];
     final DateTime today = DateTime.now();
     final DateTime startTime = DateTime(today.year, today.month, today.day, 9);
     final DateTime endTime = startTime.add(const Duration(hours: 2));
 
-    MeetingModel m = MeetingModel();
+    Meeting meet = Meeting(
+        id: 0,
+        subject: 'One on one session',
+        notes: 'Meeting detailed description',
+        startTime: startTime,
+        endTime: endTime,
+        color: Colors.grey,
+        isAllDay: false,
+        priceIn: 0);
+/*
+    meet.id = 0;
+    meet.subject = 'One on one session';
+    meet.notes = 'Meeting detailed description';
+    meet.startTime = startTime;
+    meet.endTime = endTime;
+    meet.color = Colors.grey;
+    meet.isAllDay = false;
+    meet.price = 0 as Decimal;*/
+    //
+    meetings.add(meet);
 
-    m.subject = 'One on one session';
-    m.startTime = startTime;
-    m.endTime = endTime;
-    m.color = Colors.grey;
-    m.isAllDay = false;
-
-    meetings.add(m);
-    /*
-    meetings.add(MeetingModel(0, 'One on one session', startTime, endTime,
-        Colors.grey, false, '', '', '', ''));
-*/
     return meetings;
   }
 
@@ -188,7 +198,7 @@ class DataSource extends CalendarDataSource {
 class EventDataSource extends CalendarDataSource {
   /// Creates a meeting data source, which used to set the appointment
   /// collection to the calendar
-  EventDataSource(List<MeetingModel> source) {
+  EventDataSource(List<Meeting> source) {
     appointments = source;
   }
 
@@ -217,10 +227,10 @@ class EventDataSource extends CalendarDataSource {
     return _getMeetingData(index).isAllDay;
   }
 
-  MeetingModel _getMeetingData(int index) {
+  Meeting _getMeetingData(int index) {
     final dynamic meeting = appointments![index];
-    late final MeetingModel meetingData;
-    if (meeting is MeetingModel) {
+    late final Meeting meetingData;
+    if (meeting is Meeting) {
       meetingData = meeting;
     }
 

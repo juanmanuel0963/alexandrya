@@ -1,19 +1,22 @@
 import 'package:alexandrya/meetings/screens/meeting_screen.dart';
+import 'package:alexandrya/meetings/models/meeting.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:alexandrya/users/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:decimal/decimal.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'dart:math';
 
-Map<String, List<Appointment>> _dataCollection = <String, List<Appointment>>{};
+Map<String, List<Meeting>> _dataCollection = <String, List<Meeting>>{};
 int meetingHostId = 0;
 
 /// Widget of getting started calendar
 class MeetingsListScreen extends StatefulWidget {
-  const MeetingsListScreen({Key? key, required this.user}) : super(key: key);
-  final User user;
+  const MeetingsListScreen({Key? key, required this.hostUser})
+      : super(key: key);
+  final User hostUser;
 
   @override
   _MeetingsListScreenState createState() => _MeetingsListScreenState();
@@ -22,7 +25,7 @@ class MeetingsListScreen extends StatefulWidget {
 class _MeetingsListScreenState extends State<MeetingsListScreen> {
   _MeetingsListScreenState();
 
-  final _MeetingDataSource _events = _MeetingDataSource(<Appointment>[]);
+  final _MeetingDataSource _events = _MeetingDataSource(<Meeting>[]);
   final CalendarController _calendarController = CalendarController();
 
   final List<CalendarView> _allowedViews = <CalendarView>[
@@ -40,8 +43,8 @@ class _MeetingsListScreenState extends State<MeetingsListScreen> {
   @override
   void initState() {
     _calendarController.view = CalendarView.schedule;
-    _dataCollection = <String, List<Appointment>>{};
-    meetingHostId = widget.user.iId;
+    _dataCollection = <String, List<Meeting>>{};
+    meetingHostId = widget.hostUser.iId;
     super.initState();
   }
 
@@ -51,7 +54,7 @@ class _MeetingsListScreenState extends State<MeetingsListScreen> {
         _getMeetingsListScreen(_calendarController, _events);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.user.firstname + " " + widget.user.lastname),
+        title: Text(widget.hostUser.firstname + " " + widget.hostUser.lastname),
       ),
       body: Container(child: calendar),
     );
@@ -61,11 +64,11 @@ class _MeetingsListScreenState extends State<MeetingsListScreen> {
   SfCalendar _getMeetingsListScreen(CalendarController calendarController,
       CalendarDataSource calendarDataSource) {
     return SfCalendar(
-        onTap: (appointmentDetails) {
-          if (appointmentDetails.appointments?.length == 1) {
+        onTap: (meetingDetails) {
+          if (meetingDetails.appointments?.length == 1) {
             Get.to(() => MeetingScreen(
-                  appointmentDetails: appointmentDetails.appointments![0],
-                  user: widget.user,
+                  meetingDetails: meetingDetails.appointments![0],
+                  user: widget.hostUser,
                 ));
           }
         },
@@ -100,7 +103,7 @@ class _MeetingsListScreenState extends State<MeetingsListScreen> {
 /// used to map the custom appointment data to the calendar appointment, and
 /// allows to add, remove or reset the appointment collection.
 class _MeetingDataSource extends CalendarDataSource {
-  _MeetingDataSource(List<Appointment> source) {
+  _MeetingDataSource(List<Meeting> source) {
     appointments = source;
   }
 
@@ -119,7 +122,7 @@ class _MeetingDataSource extends CalendarDataSource {
     _colorCollection.add(const Color(0xFF636363));
     _colorCollection.add(const Color(0xFF0A8043));
     //
-    List<Appointment> meetings = <Appointment>[];
+    List<Meeting> meetings = <Meeting>[];
     final Random random = Random();
 
     final url = Uri.parse(
@@ -150,14 +153,16 @@ class _MeetingDataSource extends CalendarDataSource {
             dateTo = dateTo.add(Duration(hours: timeTo.hour.toInt()));
             dateTo = dateTo.add(Duration(minutes: timeTo.minute.toInt()));
 
-            Appointment meet = Appointment(
-                id: item['id'],
-                subject: item['subject'],
-                notes: item['notes'],
-                startTime: dateFrom,
-                endTime: dateTo,
-                color: _colorCollection[random.nextInt(9)],
-                isAllDay: false);
+            Meeting meet = Meeting(
+              id: item['id'],
+              subject: item['subject'],
+              notes: item['notes'],
+              startTime: dateFrom,
+              endTime: dateTo,
+              color: _colorCollection[random.nextInt(9)],
+              isAllDay: false,
+              priceIn: Decimal.parse(item['price']),
+            );
 
             meetings.add(meet);
 

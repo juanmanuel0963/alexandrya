@@ -124,7 +124,7 @@ class UsersListScreenState extends State<UsersListScreen> {
                         //trailing: const Icon(Icons.arrow_forward),
                         onTap: () {
                           Get.to(() => UserScreen(
-                                user: item,
+                                hostUser: item,
                               ));
                         },
                       ),

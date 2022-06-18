@@ -27,7 +27,7 @@ class HomeScreenState extends State<HomeScreen> {
       ),
       body: Center(
         child: ElevatedButton(
-          child: const Text('Users list'),
+          child: const Text('Artists list'),
           onPressed: () {
             Get.to(() => const UsersListScreen());
           },

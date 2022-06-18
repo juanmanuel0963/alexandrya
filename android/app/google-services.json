@@ -1,42 +1,33 @@
 {
   "project_info": {
-    "project_number": "599463049402",
-    "firebase_url": "https://alexandrya-dev-default-rtdb.firebaseio.com",
-    "project_id": "alexandrya-dev",
-    "storage_bucket": "alexandrya-dev.appspot.com"
+    "project_number": "1071928440068",
+    "project_id": "bamboo-dryad-351723",
+    "storage_bucket": "bamboo-dryad-351723.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:599463049402:android:b526c2197a89d74b1aaa83",
+        "mobilesdk_app_id": "1:1071928440068:android:f4b8029a1a2b889c15cc51",
         "android_client_info": {
           "package_name": "app.alexandrya"
         }
       },
       "oauth_client": [
         {
-          "client_id": "599463049402-u2dtg26jv18ju6vr2gk1qjs5iq3n4l88.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "app.alexandrya",
-            "certificate_hash": "200fb1c61bdef7e9821d08e1663f2fe1b410f9e8"
-          }
-        },
-        {
-          "client_id": "599463049402-0c8jr62dvfeddkp8p7skhojjfbi653nj.apps.googleusercontent.com",
+          "client_id": "1071928440068-8jd1ejqjaaeimcrk9kdjhqeifht66ddg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBZslPOznnfUD6A0qHmxnQ_jIY6PA1L5Ik"
+          "current_key": "AIzaSyD8ZHRbMRMdAaDzqjXbWVwod1WFJsiaSNo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "599463049402-0c8jr62dvfeddkp8p7skhojjfbi653nj.apps.googleusercontent.com",
+              "client_id": "1071928440068-8jd1ejqjaaeimcrk9kdjhqeifht66ddg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
