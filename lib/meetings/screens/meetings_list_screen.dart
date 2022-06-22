@@ -68,7 +68,7 @@ class _MeetingsListScreenState extends State<MeetingsListScreen> {
           if (meetingDetails.appointments?.length == 1) {
             Get.to(() => MeetingScreen(
                   meetingDetails: meetingDetails.appointments![0],
-                  user: widget.hostUser,
+                  hostUser: widget.hostUser,
                 ));
           }
         },
@@ -81,13 +81,14 @@ class _MeetingsListScreenState extends State<MeetingsListScreen> {
             future: loadMoreAppointments(),
             builder: (context, snapShot) {
               return Container(
-                  height: _calendarController.view == CalendarView.schedule
+                  color: Colors.black.withOpacity(0.5),
+                  height: double.infinity,
+                  /*  height: _calendarController.view == CalendarView.schedule
                       ? 50
-                      : double.infinity,
+                      : double.infinity,*/
                   width: double.infinity,
                   alignment: Alignment.center,
-                  child: const CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation(Colors.blue)));
+                  child: const CircularProgressIndicator());
             },
           );
         },
@@ -171,7 +172,6 @@ class _MeetingDataSource extends CalendarDataSource {
         }
       }
     }
-
     appointments!.addAll(meetings);
     notifyListeners(CalendarDataSourceAction.add, meetings);
   }

@@ -108,7 +108,7 @@ class UsersListScreenState extends State<UsersListScreen> {
             onRefresh: refresh,
             child: ListView.builder(
                 controller: controller,
-                padding: const EdgeInsets.all(8),
+                // padding: const EdgeInsets.all(8),
                 itemCount: items.length + 1,
                 itemBuilder: (context, index) {
                   if (index < items.length) {
@@ -130,12 +130,22 @@ class UsersListScreenState extends State<UsersListScreen> {
                       ),
                     );
                   } else {
-                    return Padding(
+                    return Container(
+                        color: Colors.black.withOpacity(0.5),
+                        //height: double.infinity,
+                        height: (MediaQuery.of(context).size.height),
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        child: hasMore
+                            ? const CircularProgressIndicator()
+                            : const Text('No more data to load'));
+
+                    /*return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 32),
                         child: Center(
                             child: hasMore
                                 ? const CircularProgressIndicator()
-                                : const Text('No more data to load')));
+                                : const Text('No more data to load')));*/
                   }
                 })));
   }
