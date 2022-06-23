@@ -6,7 +6,7 @@ class LoadingOverlay extends StatefulWidget {
   const LoadingOverlay({
     Key? key,
     required this.child,
-    this.delay = const Duration(milliseconds: 500),
+    this.delay = const Duration(milliseconds: 0),
   }) : super(key: key);
 
   final Widget child;
