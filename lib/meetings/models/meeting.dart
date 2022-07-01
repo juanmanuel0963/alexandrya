@@ -14,9 +14,12 @@ class Meeting extends Appointment {
       required DateTime endTime,
       color,
       isAllDay,
-      priceIn})
-      // ignore: prefer_initializing_formals
+      priceIn,
+      hostIdIn,
+      channelIn})
       : price = priceIn,
+        hostId = hostIdIn,
+        channel = channelIn,
         super(
             id: id,
             subject: subject,
@@ -25,9 +28,12 @@ class Meeting extends Appointment {
             endTime: endTime,
             color: color,
             isAllDay: isAllDay);
-
   // Price
   Decimal price;
+  // HostId
+  int hostId;
+  // Channel
+  String channel;
   //
   //Meeting(this.id, this.subject, this.notes, this.startTime, this.endTime,
   //    this.color, this.isAllDay, this.price);

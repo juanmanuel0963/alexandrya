@@ -5,6 +5,8 @@ import 'package:alexandrya/meetings/models/meeting.dart';
 import 'package:alexandrya/users/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:uuid/uuid_util.dart';
+import 'package:uuid/uuid.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
@@ -23,16 +25,21 @@ class MeetingScreen extends StatefulWidget {
 }
 
 class MeetingScreenState extends State<MeetingScreen> {
+  final AuthManager _authManager = Get.find();
+  late String? userUid = _authManager.getUserToken();
+  late int meetingId = widget.meetingDetails.id as int;
+  late int hostId = widget.hostUser.iId;
+  //
   bool showProgress = false;
+  String sChannel = "";
+  bool showPriceButton = true;
+  bool showVideoChatButton = false;
   //
   @override
   Widget build(BuildContext context) {
     //
     String meetingName = widget.meetingDetails.subject;
     String? meetingNotes = widget.meetingDetails.notes;
-
-    AuthManager _authManager = Get.find();
-    String? userLogged = _authManager.getUserToken();
 
     String meetingDate = DateFormat('MMMM dd, yyyy')
         .format(widget.meetingDetails.startTime)
@@ -114,27 +121,45 @@ class MeetingScreenState extends State<MeetingScreen> {
                           style: const TextStyle(fontSize: 15)),
                     ),
                   )),
-              Positioned(
-                  top: 120,
-                  left: 10,
-                  child: ElevatedButton(
-                    child: Text(format.currencySymbol +
-                        " " +
-                        widget.meetingDetails.price.toString()),
-                    onPressed: () {
-                      insertMeetingsByAttendant();
-                    },
-                  )),
-              Positioned(
-                top: 120,
-                left: 90,
-                child: ElevatedButton(
-                  child: const Text('Start Video Chat'),
-                  onPressed: () {
-                    Get.to(() => const VideoChatScreen());
-                  },
-                ),
-              ),
+              showPriceButton
+                  ? Positioned(
+                      top: 120,
+                      left: 10,
+                      child: ElevatedButton(
+                        child: Text(format.currencySymbol +
+                            " " +
+                            widget.meetingDetails.price.toString()),
+                        onPressed: () async {
+                          //
+                          setState(() {
+                            showProgress = true;
+                          });
+                          //
+                          getChannel();
+                          //
+                          await insertMeetingsByAttendant();
+                          //
+                          setState(() {
+                            showProgress = false;
+                            showPriceButton = false;
+                            showVideoChatButton = true;
+                          });
+                          //
+                        },
+                      ))
+                  : Container(),
+              showVideoChatButton
+                  ? Positioned(
+                      top: 120,
+                      left: 90,
+                      child: ElevatedButton(
+                        child: const Text('Start Video Chat'),
+                        onPressed: () {
+                          Get.to(() => const VideoChatScreen());
+                        },
+                      ),
+                    )
+                  : Container(),
               showProgress
                   ? Container(
                       color: Colors.black.withOpacity(0.5),
@@ -146,16 +171,26 @@ class MeetingScreenState extends State<MeetingScreen> {
             ])));
   }
 
-  void insertMeetingsByAttendant() async {
+  void getChannel() {
+    Uuid uuid = const Uuid();
+    // Generate a v1 (time-based) id
+    String sNewChannel = uuid.v1(); // -> '6c84fb90-12c4-11e1-840d-7b25c5ee775a'
+    sNewChannel = sNewChannel.substring(0, 8);
+    print(sNewChannel);
+
     setState(() {
-      showProgress = true;
+      sChannel = sNewChannel;
     });
+  }
+
+  Future<void> insertMeetingsByAttendant() async {
     //
     await Future.delayed(const Duration(seconds: 0));
     String sStatusMessage = "";
     //
     final url = Uri.parse(
-        'https://us-east1-bamboo-dryad-351723.cloudfunctions.net/insmeetingsbyattendant?meetingid=257&hostid=1&attendantuid=kiPmBwRY6wVIqSLBmxbjHxRbAex1');
+        'https://us-east1-bamboo-dryad-351723.cloudfunctions.net/insmeetingsbyattendant?meetingid=$meetingId&hostid=$hostId&attendantuid=$userUid&channel=$sChannel');
+
     final response = await http.get(url);
 
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -175,9 +210,5 @@ class MeetingScreenState extends State<MeetingScreen> {
         }
       }
     }
-    //
-    setState(() {
-      showProgress = false;
-    });
   }
 }

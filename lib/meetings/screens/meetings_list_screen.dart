@@ -163,6 +163,8 @@ class _MeetingDataSource extends CalendarDataSource {
               color: _colorCollection[random.nextInt(9)],
               isAllDay: false,
               priceIn: Decimal.parse(item['price']),
+              hostIdIn: int.parse(item['host_id']),
+              channelIn: item['channel'],
             );
 
             meetings.add(meet);
@@ -176,15 +178,3 @@ class _MeetingDataSource extends CalendarDataSource {
     notifyListeners(CalendarDataSourceAction.add, meetings);
   }
 }
-
-
-
-/*
-        if (_dataCollection.containsKey(dateAdd)) {
-          final List<Appointment> meetings = _dataCollection[dateAdd]!;
-          meetings.add(m);
-          _dataCollection[dateAdd] = meetings;
-        } else {
-          _dataCollection[dateAdd] = [m];
-        }
-*/
