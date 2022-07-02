@@ -29,11 +29,12 @@ class MeetingScreenState extends State<MeetingScreen> {
   late String? userUid = _authManager.getUserToken();
   late int meetingId = widget.meetingDetails.id as int;
   late int hostId = widget.hostUser.iId;
+  late String channel = widget.meetingDetails.channel;
   //
   bool showProgress = false;
-  String sChannel = "";
-  bool showPriceButton = true;
-  bool showVideoChatButton = false;
+  //String sChannel = "";
+  late bool showPriceButton = (channel == "");
+  late bool showVideoChatButton = (channel != "");
   //
   @override
   Widget build(BuildContext context) {
@@ -151,7 +152,7 @@ class MeetingScreenState extends State<MeetingScreen> {
               showVideoChatButton
                   ? Positioned(
                       top: 120,
-                      left: 90,
+                      left: (showPriceButton ? 90 : 10),
                       child: ElevatedButton(
                         child: const Text('Start Video Chat'),
                         onPressed: () {
@@ -179,7 +180,7 @@ class MeetingScreenState extends State<MeetingScreen> {
     print(sNewChannel);
 
     setState(() {
-      sChannel = sNewChannel;
+      channel = sNewChannel;
     });
   }
 
@@ -189,7 +190,7 @@ class MeetingScreenState extends State<MeetingScreen> {
     String sStatusMessage = "";
     //
     final url = Uri.parse(
-        'https://us-east1-bamboo-dryad-351723.cloudfunctions.net/insmeetingsbyattendant?meetingid=$meetingId&hostid=$hostId&attendantuid=$userUid&channel=$sChannel');
+        'https://us-east1-bamboo-dryad-351723.cloudfunctions.net/insmeetingsbyattendant?meetingid=$meetingId&hostid=$hostId&attendantuid=$userUid&channel=$channel');
 
     final response = await http.get(url);
 
