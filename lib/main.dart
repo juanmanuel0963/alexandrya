@@ -37,9 +37,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: const LoadingOverlay(
+      /* home: const LoadingOverlay(
         child: SplashScreen(),
       ),
+      */
+      home: const SplashScreen(),
       builder: (context, child) => ResponsiveWrapper.builder(
           BouncingScrollWrapper.builder(context, child!),
           maxWidth: 1200,

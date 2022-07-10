@@ -1,6 +1,7 @@
 import 'package:alexandrya/meetings/screens/meeting_screen.dart';
 import 'package:alexandrya/meetings/models/meeting.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:alexandrya/users/screens/user_screen.dart';
 import 'package:alexandrya/users/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:decimal/decimal.dart';
@@ -55,6 +56,11 @@ class _MeetingsListScreenState extends State<MeetingsListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.hostUser.firstname + " " + widget.hostUser.lastname),
+        leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Get.to(() => UserScreen(hostUser: widget.hostUser));
+            }),
       ),
       body: Container(child: calendar),
     );
@@ -166,9 +172,11 @@ class _MeetingDataSource extends CalendarDataSource {
               hostIdIn: int.parse(item['host_id']),
               channelIn: item['channel'],
             );
-
-            meetings.add(meet);
-
+            //
+            if (meet.channel == "") {
+              meetings.add(meet);
+            }
+            //
             _dataCollection[dateItem.toString() + " " + sId] = [meet];
           }
         }

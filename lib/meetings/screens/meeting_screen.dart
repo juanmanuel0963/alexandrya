@@ -1,3 +1,4 @@
+import 'package:alexandrya/meetings/screens/meetings_list_screen.dart';
 import 'package:alexandrya/video_chat/screens/video_chat_screen.dart';
 import 'package:alexandrya/helpers/loading/loading_overlay.dart';
 import 'package:alexandrya/auth/helpers/auth_manager.dart';
@@ -61,9 +62,18 @@ class MeetingScreenState extends State<MeetingScreen> {
     Locale locale = Localizations.localeOf(context);
     var format = NumberFormat.simpleCurrency(locale: locale.toString());
     return Scaffold(
+        /*    appBar: AppBar(
+          title:
+              Text(widget.hostUser.firstname + " " + widget.hostUser.lastname),
+        ),*/
         appBar: AppBar(
           title:
               Text(widget.hostUser.firstname + " " + widget.hostUser.lastname),
+          leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Get.to(() => MeetingsListScreen(hostUser: widget.hostUser));
+              }),
         ),
         body: Center(
             child: Stack(

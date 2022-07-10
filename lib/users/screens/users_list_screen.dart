@@ -1,3 +1,4 @@
+import 'package:alexandrya/home/screens/home_screen.dart';
 import 'package:alexandrya/users/models/user.dart';
 import 'package:alexandrya/users/screens/user_screen.dart';
 import 'package:flutter/material.dart';
@@ -101,8 +102,18 @@ class UsersListScreenState extends State<UsersListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        /*
         appBar: AppBar(
           title: const Text('Meet your starts'),
+        ),
+*/
+        appBar: AppBar(
+          title: const Text('Meet your starts'),
+          leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Get.to(() => const HomeScreen());
+              }),
         ),
         body: RefreshIndicator(
             onRefresh: refresh,

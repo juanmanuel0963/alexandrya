@@ -1,6 +1,7 @@
 import 'package:alexandrya/auth/controllers/auth_controller.dart';
 //import 'package:alexandrya/video_chat/screens/video_chat_screen.dart';
 import 'package:alexandrya/users/screens/users_list_screen.dart';
+import 'package:alexandrya/auth/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,6 +22,7 @@ class HomeScreenState extends State<HomeScreen> {
           IconButton(
               onPressed: () {
                 AuthController.authInstance.signOut();
+                Get.to(() => const AuthScreen());
               },
               icon: const Icon(Icons.logout_rounded))
         ],

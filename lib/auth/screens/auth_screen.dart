@@ -1,5 +1,6 @@
 import 'package:alexandrya/auth/controllers/auth_controller.dart';
 import 'package:alexandrya/helpers/loading/loading_overlay.dart';
+import 'package:alexandrya/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -133,8 +134,8 @@ class AuthScreenState extends State<AuthScreen> {
 
   // This function will be triggered when the button is pressed
   void authLoginLoading() async {
-    LoadingOverlay.of(context).show();
-    await Future.delayed(const Duration(seconds: 0));
+    //LoadingOverlay.of(context).show();
+    //   await Future.delayed(const Duration(seconds: 0));
 
     if (formKey.currentState?.validate() ?? false) {
       String sStatusMessage = await AuthController.authInstance.login(
@@ -150,15 +151,17 @@ class AuthScreenState extends State<AuthScreen> {
             onConfirm: () {
               Get.back();
             });
+      } else {
+        Get.to(() => const HomeScreen());
       }
     }
 
-    LoadingOverlay.of(context).hide();
+    //LoadingOverlay.of(context).hide();
   }
 
   void authRegisterLoading() async {
-    LoadingOverlay.of(context).show();
-    await Future.delayed(const Duration(seconds: 0));
+    //LoadingOverlay.of(context).show();
+    //  await Future.delayed(const Duration(seconds: 0));
 
     if (formKey.currentState?.validate() ?? false) {
       String sStatusMessage = await AuthController.authInstance.register(
@@ -177,7 +180,7 @@ class AuthScreenState extends State<AuthScreen> {
       }
     }
 
-    LoadingOverlay.of(context).hide();
+    //LoadingOverlay.of(context).hide();
   }
 }
 

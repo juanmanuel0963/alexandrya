@@ -1,5 +1,6 @@
 import 'package:alexandrya/meetings/screens/meetings_list_screen.dart';
 import 'package:alexandrya/users/models/user.dart';
+import 'package:alexandrya/users/screens/users_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,8 +16,16 @@ class UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      /*appBar: AppBar(
+        title: Text(widget.hostUser.firstname + " " + widget.hostUser.lastname),
+      ),*/
       appBar: AppBar(
         title: Text(widget.hostUser.firstname + " " + widget.hostUser.lastname),
+        leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Get.to(() => const UsersListScreen());
+            }),
       ),
       body: Center(
         child: Column(
